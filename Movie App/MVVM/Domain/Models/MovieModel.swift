@@ -1,6 +1,10 @@
 
 import Foundation
 
+struct MovieResponse: Codable {
+    let items: [MovieModel]
+    let errorMessage: String
+}
 struct MovieModel: Codable {
     let id, title, fullTitle, year: String
     let releaseState: String
