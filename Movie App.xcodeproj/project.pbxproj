@@ -22,6 +22,7 @@
 		144A15CB298E9C0C001A7BC2 /* MoviesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A15CA298E9C0C001A7BC2 /* MoviesDataService.swift */; };
 		144A15CE298E9D05001A7BC2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 144A15CD298E9D05001A7BC2 /* Alamofire */; };
 		144A15D0298EA964001A7BC2 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A15CF298EA964001A7BC2 /* MovieListTableViewCell.swift */; };
+		144A15D3298F57A4001A7BC2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 144A15D2298F57A4001A7BC2 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144A15D3298F57A4001A7BC2 /* Kingfisher in Frameworks */,
 				144A15CE298E9D05001A7BC2 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +193,7 @@
 			name = "Movie App";
 			packageProductDependencies = (
 				144A15CD298E9D05001A7BC2 /* Alamofire */,
+				144A15D2298F57A4001A7BC2 /* Kingfisher */,
 			);
 			productName = "Movie App";
 			productReference = 144A159C298E8576001A7BC2 /* Movie App.app */;
@@ -222,6 +225,7 @@
 			mainGroup = 144A1593298E8576001A7BC2;
 			packageReferences = (
 				144A15CC298E9D05001A7BC2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				144A15D1298F57A4001A7BC2 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 144A159D298E8576001A7BC2 /* Products */;
 			projectDirPath = "";
@@ -488,6 +492,14 @@
 				kind = branch;
 			};
 		};
+		144A15D1298F57A4001A7BC2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -495,6 +507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 144A15CC298E9D05001A7BC2 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		144A15D2298F57A4001A7BC2 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 144A15D1298F57A4001A7BC2 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

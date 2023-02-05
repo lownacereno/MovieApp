@@ -31,7 +31,6 @@ class HomeViewController : UIViewController {
             self.movieList = viewModel.movieList
             print(viewModel.movieList.count)
             tableView.reloadData()
-            
         }
     }
     
