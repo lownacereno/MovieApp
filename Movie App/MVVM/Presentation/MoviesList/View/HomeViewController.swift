@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-class HomeViewController : UIViewController {
-    
+class HomeViewController : UIViewController, HomeViewControllerProtocol{
+
     private let tableView = UITableView()
     private let dataSource : MoviesTableViewDatasource?
     private let delegate : MoviesTableViewDelegate?
@@ -56,6 +56,13 @@ class HomeViewController : UIViewController {
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         tableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    func goToDetail(indexPath: IndexPath) {
+        let model = movieList[indexPath.row]
+        let movieDetail = MovieDetailViewController()
+        movieDetail.detail = model
+        navigationController?.pushViewController(movieDetail, animated: true)
     }
 }
 

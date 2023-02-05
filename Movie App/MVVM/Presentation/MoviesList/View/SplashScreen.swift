@@ -1,13 +1,16 @@
 import UIKit
 import CoreLocation
 
-class SplashScreen: UIViewController{
+class SplashScreen: UIViewController, CLLocationManagerDelegate{
     
     private let icon = UIImageView()
     var timer = Timer()
+    var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
         initViews()
         view.backgroundColor = .black
     }
@@ -21,11 +24,11 @@ class SplashScreen: UIViewController{
     
     func splashScreenConstraints(){
         NSLayoutConstraint.activate([
-           icon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            icon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             icon.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             icon.widthAnchor.constraint(equalToConstant: 250),
             icon.heightAnchor.constraint(equalToConstant: 250)
-           ]) }
+        ]) }
     
     func moviePosterCell(){
         icon.contentMode = .scaleAspectFill
@@ -34,11 +37,10 @@ class SplashScreen: UIViewController{
     }
     
     func requesLocationPermission(){
-        let locationManager = CLLocationManager()
+        
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined || status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
-            locationManager.requestWhenInUseAuthorization()
-            splashTimer()
+            self.locationManager.requestWhenInUseAuthorization()
         }else{
             splashTimer()
         }
@@ -53,5 +55,17 @@ class SplashScreen: UIViewController{
     
     func setMovieIcon(){
         icon.image = UIImage(named: "icon")
-}
+    }
+    
+    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways:
+            splashTimer()
+            break
+        case .authorizedWhenInUse:
+            splashTimer()
+            break
+        default: break
+        }
+    }
 }
