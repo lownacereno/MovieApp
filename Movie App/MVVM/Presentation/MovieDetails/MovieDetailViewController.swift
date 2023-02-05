@@ -9,6 +9,7 @@ class MovieDetailViewController: UIViewController {
     private let movieReleaseState = UILabel()
     private let movieStars = UILabel()
     private let movieReview = UILabel()
+    private let movieRating = UILabel()
     private let moviePoster = UIImageView()
     
     override func viewDidLoad() {
@@ -51,6 +52,13 @@ class MovieDetailViewController: UIViewController {
         movieTitle.font = .boldSystemFont(ofSize: 30)
         movieTitle.numberOfLines = 0
         view.addSubview(movieTitle)
+    }
+    
+    func movieRatingSetup(){
+        movieRating.translatesAutoresizingMaskIntoConstraints = false
+        movieRating.font = .boldSystemFont(ofSize: 30)
+        movieRating.numberOfLines = 0
+        view.addSubview(movieRating)
     }
     
     func movieReleaseStateSetup(){

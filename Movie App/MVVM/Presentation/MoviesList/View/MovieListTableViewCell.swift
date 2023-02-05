@@ -10,7 +10,6 @@ class MovieListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         customCellConfigure()
-        movieCellConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -21,6 +20,7 @@ class MovieListTableViewCell: UITableViewCell {
         movieTitleCell()
         movieYearCell()
         moviePosterCell()
+        movieCellConstraints()
     }
     
     func movieCellConstraints(){
@@ -28,9 +28,11 @@ class MovieListTableViewCell: UITableViewCell {
             moviePoster.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             moviePoster.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             moviePoster.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            moviePoster.widthAnchor.constraint(equalToConstant: 50),
-            moviePoster.heightAnchor.constraint(equalToConstant: 50),
+            moviePoster.widthAnchor.constraint(equalToConstant: 100),
+            moviePoster.heightAnchor.constraint(equalToConstant: 100),
+            movieTitle.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             movieTitle.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: 12),
+            movieTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             movieReleaseState.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 12),
             movieReleaseState.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: 12)
         ])
@@ -39,6 +41,7 @@ class MovieListTableViewCell: UITableViewCell {
     func movieTitleCell(){
         movieTitle.font = .boldSystemFont(ofSize: 20)
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
+        movieTitle.numberOfLines = 0
         addSubview(movieTitle)
     }
     
@@ -51,6 +54,8 @@ class MovieListTableViewCell: UITableViewCell {
     func moviePosterCell(){
         moviePoster.contentMode = .scaleAspectFill
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
+        moviePoster.layer.cornerRadius = 50
+        moviePoster.clipsToBounds = true
         addSubview(moviePoster)
     }
     

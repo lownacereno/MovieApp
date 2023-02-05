@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>La aplicación necesita su ubicación para poder dar recomendaciones sobre las películas más populares en tu país</string>
+	<key>NSLocationUsageDescription</key>
+	<string>La aplicación necesita su ubicación para poder dar recomendaciones sobre películas en tu país</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

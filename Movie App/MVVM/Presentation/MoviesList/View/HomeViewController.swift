@@ -26,6 +26,8 @@ class HomeViewController : UIViewController {
         
         initViews()
         viewModel.getMovies()
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.title = "Movies"
         
         viewModel.moviesDownloaded = { [self] in
             self.movieList = viewModel.movieList

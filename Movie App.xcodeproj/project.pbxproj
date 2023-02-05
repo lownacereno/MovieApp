@@ -24,6 +24,7 @@
 		144A15D0298EA964001A7BC2 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A15CF298EA964001A7BC2 /* MovieListTableViewCell.swift */; };
 		144A15D3298F57A4001A7BC2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 144A15D2298F57A4001A7BC2 /* Kingfisher */; };
 		146B4DDF298F5D4C00F17A7A /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146B4DDE298F5D4C00F17A7A /* MovieDetailViewController.swift */; };
+		146B4DE1298FCF8800F17A7A /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146B4DE0298FCF8800F17A7A /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		144A15CA298E9C0C001A7BC2 /* MoviesDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataService.swift; sourceTree = "<group>"; };
 		144A15CF298EA964001A7BC2 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 		146B4DDE298F5D4C00F17A7A /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		146B4DE0298FCF8800F17A7A /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 		144A15BD298E8751001A7BC2 /* MovieDetails */ = {
 			isa = PBXGroup;
 			children = (
+				146B4DDE298F5D4C00F17A7A /* MovieDetailViewController.swift */,
 			);
 			path = MovieDetails;
 			sourceTree = "<group>";
@@ -157,7 +160,7 @@
 				144A15C4298E9665001A7BC2 /* MoviesTableViewDatasource.swift */,
 				144A15C6298E98CB001A7BC2 /* MoviesTableViewDelegate.swift */,
 				144A15CF298EA964001A7BC2 /* MovieListTableViewCell.swift */,
-				146B4DDE298F5D4C00F17A7A /* MovieDetailViewController.swift */,
+				146B4DE0298FCF8800F17A7A /* SplashScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				146B4DDF298F5D4C00F17A7A /* MovieDetailViewController.swift in Sources */,
 				144A15C3298E92CB001A7BC2 /* HomeViewModel.swift in Sources */,
 				144A15C5298E9665001A7BC2 /* MoviesTableViewDatasource.swift in Sources */,
+				146B4DE1298FCF8800F17A7A /* SplashScreen.swift in Sources */,
 				144A15A0298E8576001A7BC2 /* AppDelegate.swift in Sources */,
 				144A15D0298EA964001A7BC2 /* MovieListTableViewCell.swift in Sources */,
 				144A15AA298E8576001A7BC2 /* Movie_App.xcdatamodeld in Sources */,

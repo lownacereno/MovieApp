@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           window?.windowScene = windowScene
           window?.makeKeyAndVisible()
           
-        let viewController = HomeViewController(dataSourceTable: MoviesTableViewDatasource(), delegateTable: MoviesTableViewDelegate())
+        let viewController = SplashScreen()
           let navigationController = UINavigationController(rootViewController: viewController)
           window?.rootViewController = navigationController
     }
