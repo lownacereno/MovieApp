@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = HomeViewController(dataSourceTable: MoviesTableViewDatasource(), delegateTable: MoviesTableViewDelegate())
           let navigationController = UINavigationController(rootViewController: viewController)
           window?.rootViewController = navigationController
-          
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

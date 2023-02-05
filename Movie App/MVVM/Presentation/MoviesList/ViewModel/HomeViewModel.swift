@@ -16,10 +16,6 @@ class HomeViewModel {
                 self.movieList = response?.items ?? []
                 self.moviesDownloaded?()
             }
-            
         })
-        
     }
-    
-    
 }

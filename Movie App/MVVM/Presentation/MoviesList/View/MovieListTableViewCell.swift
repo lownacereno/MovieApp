@@ -4,7 +4,7 @@ import Kingfisher
 class MovieListTableViewCell: UITableViewCell {
     
     private var movieTitle = UILabel()
-    private let movieYear = UILabel()
+    private let movieReleaseState = UILabel()
     private let moviePoster = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,8 +31,8 @@ class MovieListTableViewCell: UITableViewCell {
             moviePoster.widthAnchor.constraint(equalToConstant: 50),
             moviePoster.heightAnchor.constraint(equalToConstant: 50),
             movieTitle.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: 12),
-            movieYear.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 12),
-            movieYear.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: 12)
+            movieReleaseState.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 12),
+            movieReleaseState.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: 12)
         ])
     }
     
@@ -43,21 +43,20 @@ class MovieListTableViewCell: UITableViewCell {
     }
     
     func movieYearCell(){
-        movieYear.font = .systemFont(ofSize: 20)
-        movieYear.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(movieYear)
+        movieReleaseState.font = .systemFont(ofSize: 20)
+        movieReleaseState.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(movieReleaseState)
     }
     
     func moviePosterCell(){
         moviePoster.contentMode = .scaleAspectFill
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviePoster)
-        
     }
     
     func setCellMovieValue(model: MovieModel){
         self.movieTitle.text = model.title
-        self.movieYear.text = model.year
+        self.movieReleaseState.text = model.releaseState
         guard let url = URL(string: model.image ) else {return}
         self.moviePoster.kf.setImage(with: url)
     }
