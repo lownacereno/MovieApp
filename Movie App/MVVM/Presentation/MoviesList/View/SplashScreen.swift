@@ -37,12 +37,9 @@ class SplashScreen: UIViewController, CLLocationManagerDelegate{
     }
     
     func requesLocationPermission(){
-        
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined || status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
             self.locationManager.requestWhenInUseAuthorization()
-        }else{
-            splashTimer()
         }
     }
     

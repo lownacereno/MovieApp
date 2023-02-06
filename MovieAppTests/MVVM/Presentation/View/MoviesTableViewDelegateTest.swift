@@ -1,7 +1,7 @@
 import XCTest
 @testable import Movie_App
 
-class MoviesTableViewDataSourceTest: XCTestCase{
+class MoviesTableViewDelegateTest: XCTestCase{
     
     var sut : MoviesTableViewDelegate!
     var mock : NavigationDetailMock!
