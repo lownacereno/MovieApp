@@ -4,25 +4,25 @@ import CoreLocation
 class SplashScreen: UIViewController, CLLocationManagerDelegate{
     
     private let icon = UIImageView()
-    var timer = Timer()
-    var locationManager : CLLocationManager!
+    private var timer = Timer()
+    private var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager = CLLocationManager()
         locationManager.delegate = self
         initViews()
-        view.backgroundColor = .black
+        view.backgroundColor = .white
     }
     
-    func initViews(){
+    private func initViews(){
         moviePosterCell()
         splashScreenConstraints()
         setMovieIcon()
         requesLocationPermission()
     }
     
-    func splashScreenConstraints(){
+    private func splashScreenConstraints(){
         NSLayoutConstraint.activate([
             icon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             icon.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -30,27 +30,27 @@ class SplashScreen: UIViewController, CLLocationManagerDelegate{
             icon.heightAnchor.constraint(equalToConstant: 250)
         ]) }
     
-    func moviePosterCell(){
+    private func moviePosterCell(){
         icon.contentMode = .scaleAspectFill
         icon.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(icon)
     }
     
-    func requesLocationPermission(){
+    private func requesLocationPermission(){
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined || status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
             self.locationManager.requestWhenInUseAuthorization()
         }
     }
     
-    func splashTimer(){
+    private func splashTimer(){
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {timer in
             let viewController = HomeViewController(dataSourceTable: MoviesTableViewDatasource(), delegateTable: MoviesTableViewDelegate())
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
-    func setMovieIcon(){
+    private func setMovieIcon(){
         icon.image = UIImage(named: "icon")
     }
     

@@ -28,11 +28,12 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         super.viewDidLoad()
         view.backgroundColor = .white
         searchBarView.delegate = self
+        tableView.backgroundColor = .white
         self.navigationItem.setHidesBackButton(true, animated: false)
         reloadView()
     }
     
-    func initMovieListViews(){
+    private func initMovieListViews(){
         movieListSetup()
         movieSearchBarSetup()
         movieListConstraints()
@@ -40,13 +41,13 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         viewModel.getMovies()
     }
     
-    func initErrorViews(){
+    private func initErrorViews(){
         errorSetup()
         errorButtonSetup()
         errorMovieConstraints()
     }
     
-    func errorMovieConstraints(){
+    private func errorMovieConstraints(){
         NSLayoutConstraint.activate([
             errorInternetConection.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             errorInternetConection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -57,7 +58,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         ])
     }
     
-    func movieListConstraints(){
+    private func movieListConstraints(){
         NSLayoutConstraint.activate([
             searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -70,7 +71,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         ])
     }
     
-    func errorSetup(){
+    private func errorSetup(){
         errorInternetConection.translatesAutoresizingMaskIntoConstraints = false
         errorInternetConection.font = .boldSystemFont(ofSize: 20)
         errorInternetConection.numberOfLines = 0
@@ -79,7 +80,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         view.addSubview(errorInternetConection)
     }
     
-    func errorButtonSetup(){
+    private func errorButtonSetup(){
         errorButton.translatesAutoresizingMaskIntoConstraints = false
         errorButton.backgroundColor = .init(red: 60/255.0, green: 64/255.0, blue: 72/255.0, alpha: 1)
         errorButton.layer.cornerRadius = 15
@@ -88,21 +89,19 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         view.addSubview(errorButton)
     }
     
-    func movieSearchBarSetup(){
+    private func movieSearchBarSetup(){
         searchBarView.translatesAutoresizingMaskIntoConstraints = false
         searchBarView.backgroundColor = .white
         view.addSubview(searchBarView)
     }
     
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         movieList = originalMovieList
         movieList = searchText.isEmpty ? originalMovieList : movieList.filter{$0.title.contains(searchText)}
         tableView.reloadData()
-        
     }
     
-    func movieListSetup(){
+    private func movieListSetup(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.delegate = delegate
@@ -117,7 +116,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         navigationController?.pushViewController(movieDetail, animated: true)
     }
     
-    func checkConectivity() -> Bool {
+    private func checkConectivity() -> Bool {
         if Conectivity.isConectedToInternet{
             return true
         }else{
@@ -131,7 +130,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
             self.navigationItem.title = "Películas en cartelera"
             viewModel.moviesDownloaded = { [self] in
                 self.movieList = viewModel.movieList.sorted{
-                    $0.getReleaseStateAsDate() .compare($1.getReleaseStateAsDate()) == .orderedDescending
+                    $0.getReleaseStateAsDate().compare($1.getReleaseStateAsDate()) == .orderedDescending
                 }
                 self.originalMovieList = movieList
                 print(viewModel.movieList.count)

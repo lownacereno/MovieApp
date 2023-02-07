@@ -9,6 +9,7 @@ class MovieListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .white
         customCellConfigure()
     }
     
@@ -16,14 +17,14 @@ class MovieListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func customCellConfigure(){
+    private func customCellConfigure(){
         moviePosterCell()
         movieTitleCell()
         movieReleaseStateCell()
         movieCellConstraints()
     }
     
-    func movieCellConstraints(){
+    private func movieCellConstraints(){
         NSLayoutConstraint.activate([
             moviePoster.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             moviePoster.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
@@ -38,7 +39,7 @@ class MovieListTableViewCell: UITableViewCell {
         ])
     }
     
-    func moviePosterCell(){
+    private func moviePosterCell(){
         moviePoster.contentMode = .scaleAspectFill
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
         moviePoster.layer.cornerRadius = 50
@@ -46,20 +47,22 @@ class MovieListTableViewCell: UITableViewCell {
         addSubview(moviePoster)
     }
     
-    func movieTitleCell(){
+    private func movieTitleCell(){
         movieTitle.font = .boldSystemFont(ofSize: 20)
+        movieTitle.textColor = .red
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.numberOfLines = 0
         addSubview(movieTitle)
     }
     
-    func movieReleaseStateCell(){
+    private func movieReleaseStateCell(){
         movieReleaseState.font = .systemFont(ofSize: 20)
+        movieReleaseState.textColor = .black
         movieReleaseState.translatesAutoresizingMaskIntoConstraints = false
         addSubview(movieReleaseState)
     }
     
-    func setCellMovieValue(model: MovieModel){
+     func setCellMovieValue(model: MovieModel){
         self.movieTitle.text = model.title
         self.movieReleaseState.text = model.releaseState
         guard let url = URL(string: model.image ) else {return}

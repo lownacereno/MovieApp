@@ -21,7 +21,7 @@ class MovieDetailViewController: UIViewController {
         initDetailViews()
     }
     
-    func initDetailViews(){
+    private func initDetailViews(){
         stackViewPosterSetup()
         moviePosterSetup()
         stackViewSetup()
@@ -35,7 +35,7 @@ class MovieDetailViewController: UIViewController {
         setMovieValueDescription()
     }
     
-    func movieDetailConstraints(){
+    private func movieDetailConstraints(){
         NSLayoutConstraint.activate([
             stackViewPoster.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             stackViewPoster.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -49,7 +49,7 @@ class MovieDetailViewController: UIViewController {
         ])
     }
     
-    func stackViewPosterSetup(){
+    private func stackViewPosterSetup(){
         stackViewPoster.translatesAutoresizingMaskIntoConstraints = false
         stackViewPoster.distribution = .fillEqually
         stackViewPoster.axis = .horizontal
@@ -58,7 +58,7 @@ class MovieDetailViewController: UIViewController {
         view.addSubview(stackViewPoster)
     }
     
-    func stackViewSetup(){
+    private func stackViewSetup(){
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         stackView.axis = .vertical
@@ -67,48 +67,50 @@ class MovieDetailViewController: UIViewController {
         stackViewPoster.addArrangedSubview(stackView)
     }
     
-    func moviePosterSetup(){
+    private func moviePosterSetup(){
         moviePoster.translatesAutoresizingMaskIntoConstraints = false
         stackViewPoster.addArrangedSubview(moviePoster)
     }
     
-    func movieTitleSetup(){
+    private func movieTitleSetup(){
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.font = .boldSystemFont(ofSize: 25)
+        movieTitle.textColor = .red
         movieTitle.numberOfLines = 0
         stackView.addArrangedSubview(movieTitle)
     }
     
-    func movieReleaseStateSetup(){
+    private func movieReleaseStateSetup(){
         movieReleaseState.translatesAutoresizingMaskIntoConstraints = false
         movieReleaseState.font = .systemFont(ofSize: 22)
         movieReleaseState.numberOfLines = 0
         stackView.addArrangedSubview(movieReleaseState)
     }
     
-    func movieStarsSetup(){
+    private func movieStarsSetup(){
         movieStars.translatesAutoresizingMaskIntoConstraints = false
         movieStars.font = .systemFont(ofSize: 22)
         movieStars.numberOfLines = 0
         stackView.addArrangedSubview(movieStars)
     }
     
-    func movieRatingSetup(){
+    private func movieRatingSetup(){
         movieRating.translatesAutoresizingMaskIntoConstraints = false
         movieRating.font = .systemFont(ofSize: 15)
         movieRating.textAlignment = .right
         stackView.addArrangedSubview(movieRating)
     }
     
-    func titleDescriptionSetup(){
+    private func titleDescriptionSetup(){
         titleDescription.translatesAutoresizingMaskIntoConstraints = false
         titleDescription.font = .boldSystemFont(ofSize: 25)
+        titleDescription.textColor = .red
         titleDescription.numberOfLines = 0
-        titleDescription.text = "Movie Review"
+        titleDescription.text = "Descripción"
         view.addSubview(titleDescription)
     }
     
-    func movieReviewSetup(){
+    private func movieReviewSetup(){
         movieReview.translatesAutoresizingMaskIntoConstraints = false
         movieReview.font = .systemFont(ofSize: 22)
         movieReview.numberOfLines = 0
@@ -116,12 +118,11 @@ class MovieDetailViewController: UIViewController {
         view.addSubview(movieReview)
     }
     
-    func setMovieValueDescription(){
-        movieRating.text.self = "\(detail?.imDBRating ?? "") ⭐️"
+    private func setMovieValueDescription(){
+        movieRating.text.self = "\(detail?.rating ?? "") ⭐️"
         movieTitle.text.self = detail?.title
-        movieReleaseState.text.self =
-        detail?.releaseState ?? ""
-        movieStars.text.self = detail?.stars
+        movieReleaseState.text.self = detail?.releaseState
+        movieStars.text.self = "Actores: \(detail?.stars ?? "")"
         movieReview.text.self = detail?.plot
         guard let url = URL(string: detail!.image ) else {return}
         self.moviePoster.kf.setImage(with: url)

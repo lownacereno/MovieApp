@@ -10,7 +10,7 @@ struct MovieModel: Codable {
     let releaseState: String
     let image: String
     let runtimeMins, runtimeStr, plot, contentRating: String
-    let imDBRating, imDBRatingCount, metacriticRating, genres: String
+    let rating, imDBRatingCount, metacriticRating, genres: String
     let genreList: [GenreList]
     let directors: String
     let directorList: [RList]
@@ -19,7 +19,7 @@ struct MovieModel: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, title, fullTitle, year, releaseState, image, runtimeMins, runtimeStr, plot, contentRating
-        case imDBRating = "imDbRating"
+        case rating = "imDbRating"
         case imDBRatingCount = "imDbRatingCount"
         case metacriticRating, genres, genreList, directors, directorList, stars, starList
     }
