@@ -17,9 +17,9 @@ class MovieListTableViewCell: UITableViewCell {
     }
     
     func customCellConfigure(){
-        movieTitleCell()
-        movieYearCell()
         moviePosterCell()
+        movieTitleCell()
+        movieReleaseStateCell()
         movieCellConstraints()
     }
     
@@ -38,6 +38,14 @@ class MovieListTableViewCell: UITableViewCell {
         ])
     }
     
+    func moviePosterCell(){
+        moviePoster.contentMode = .scaleAspectFill
+        moviePoster.translatesAutoresizingMaskIntoConstraints = false
+        moviePoster.layer.cornerRadius = 50
+        moviePoster.clipsToBounds = true
+        addSubview(moviePoster)
+    }
+    
     func movieTitleCell(){
         movieTitle.font = .boldSystemFont(ofSize: 20)
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -45,18 +53,10 @@ class MovieListTableViewCell: UITableViewCell {
         addSubview(movieTitle)
     }
     
-    func movieYearCell(){
+    func movieReleaseStateCell(){
         movieReleaseState.font = .systemFont(ofSize: 20)
         movieReleaseState.translatesAutoresizingMaskIntoConstraints = false
         addSubview(movieReleaseState)
-    }
-    
-    func moviePosterCell(){
-        moviePoster.contentMode = .scaleAspectFill
-        moviePoster.translatesAutoresizingMaskIntoConstraints = false
-        moviePoster.layer.cornerRadius = 50
-        moviePoster.clipsToBounds = true
-        addSubview(moviePoster)
     }
     
     func setCellMovieValue(model: MovieModel){

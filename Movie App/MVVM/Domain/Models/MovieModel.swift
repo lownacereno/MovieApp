@@ -4,6 +4,7 @@ struct MovieResponse: Codable {
     let items: [MovieModel]
     let errorMessage: String
 }
+
 struct MovieModel: Codable {
     let id, title, fullTitle, year: String
     let releaseState: String
@@ -22,7 +23,13 @@ struct MovieModel: Codable {
         case imDBRatingCount = "imDbRatingCount"
         case metacriticRating, genres, genreList, directors, directorList, stars, starList
     }
-}
+    
+    func getReleaseStateAsDate() -> Date {
+        let format = DateFormatter()
+        format.locale = Locale(identifier: "en_US_POSIX")
+        format.dateFormat = "dd-MMM-yyyy"
+        return format.date(from: self.releaseState) ?? Date()
+    }
 
 struct RList: Codable {
     let id, name: String
@@ -31,4 +38,4 @@ struct RList: Codable {
 struct GenreList: Codable {
     let key, value: String
 }
-
+}

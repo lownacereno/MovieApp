@@ -94,10 +94,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     func movieRatingSetup(){
-        
         movieRating.translatesAutoresizingMaskIntoConstraints = false
         movieRating.font = .systemFont(ofSize: 15)
-       // movieRating.numberOfLines = 0
         movieRating.textAlignment = .right
         stackView.addArrangedSubview(movieRating)
     }

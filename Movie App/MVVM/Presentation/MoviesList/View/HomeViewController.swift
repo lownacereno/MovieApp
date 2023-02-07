@@ -1,21 +1,16 @@
-import Foundation
 import UIKit
-import Alamofire
 
-struct Conectivity{
-    static let shared = NetworkReachabilityManager()!
-    static var isConectedToInternet : Bool { return self.shared.isReachable}
-}
-
-class HomeViewController : UIViewController, HomeViewControllerProtocol{
+class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearchBarDelegate{
     
     var movieList : [MovieModel] = []
+    var originalMovieList : [MovieModel] = []
     private let tableView = UITableView()
     private let dataSource : MoviesTableViewDatasource?
     private let delegate : MoviesTableViewDelegate?
     private let viewModel = HomeViewModel(dataService: MoviesDataService())
     private let errorInternetConection = UILabel()
     private var errorButton = UIButton()
+    private var searchBarView = UISearchBar()
     
     init(dataSourceTable: MoviesTableViewDatasource, delegateTable: MoviesTableViewDelegate){
         self.dataSource = dataSourceTable
@@ -31,19 +26,27 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
+        searchBarView.delegate = self
         self.navigationItem.setHidesBackButton(true, animated: false)
         reloadView()
+    }
+    
+    func initMovieListViews(){
+        movieListSetup()
+        movieSearchBarSetup()
+        movieListConstraints()
+        searchBar(searchBarView, textDidChange: "")
+        viewModel.getMovies()
     }
     
     func initErrorViews(){
         errorSetup()
         errorButtonSetup()
-        movieListConstraints()
+        errorMovieConstraints()
     }
     
-    func movieListConstraints(){
+    func errorMovieConstraints(){
         NSLayoutConstraint.activate([
             errorInternetConection.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             errorInternetConection.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -51,6 +54,19 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol{
             errorButton.topAnchor.constraint(equalTo: errorInternetConection.bottomAnchor, constant: 100),
             errorButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             errorButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+    }
+    
+    func movieListConstraints(){
+        NSLayoutConstraint.activate([
+            searchBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBarView.heightAnchor.constraint(equalToConstant: 50),
+            tableView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -67,9 +83,23 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol{
         errorButton.translatesAutoresizingMaskIntoConstraints = false
         errorButton.backgroundColor = .init(red: 60/255.0, green: 64/255.0, blue: 72/255.0, alpha: 1)
         errorButton.layer.cornerRadius = 15
-        errorButton.setTitle("Recargar vista", for: .normal)
+        errorButton.setTitle("Volver a intentar", for: .normal)
         errorButton.addTarget(self, action: #selector(reloadView), for: .touchDown)
         view.addSubview(errorButton)
+    }
+    
+    func movieSearchBarSetup(){
+        searchBarView.translatesAutoresizingMaskIntoConstraints = false
+        searchBarView.backgroundColor = .white
+        view.addSubview(searchBarView)
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        movieList = originalMovieList
+        movieList = searchText.isEmpty ? originalMovieList : movieList.filter{$0.title.contains(searchText)}
+        tableView.reloadData()
+        
     }
     
     func movieListSetup(){
@@ -78,12 +108,6 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol{
         tableView.delegate = delegate
         tableView.dataSource = dataSource
         tableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: "cell")
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
     
     func goToDetail(indexPath: IndexPath) {
@@ -95,28 +119,27 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol{
     
     func checkConectivity() -> Bool {
         if Conectivity.isConectedToInternet{
-            print("esta conectado")
             return true
         }else{
-            print("no esta conectado")
             return false
         }
     }
     
     @objc func reloadView(){
         if checkConectivity(){
-            movieListSetup()
-            viewModel.getMovies()
-            self.navigationItem.title = "Movies"
+            initMovieListViews()
+            self.navigationItem.title = "Películas en cartelera"
             viewModel.moviesDownloaded = { [self] in
-                self.movieList = viewModel.movieList
+                self.movieList = viewModel.movieList.sorted{
+                    $0.getReleaseStateAsDate() .compare($1.getReleaseStateAsDate()) == .orderedDescending
+                }
+                self.originalMovieList = movieList
                 print(viewModel.movieList.count)
                 tableView.reloadData()
             }
         }else{
             initErrorViews()
         }
-        
     }
 }
 
