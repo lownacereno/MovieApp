@@ -62,7 +62,14 @@ class SplashScreen: UIViewController, CLLocationManagerDelegate{
         case .authorizedWhenInUse:
             splashTimer()
             break
-        default: break
+        case .denied:
+            let alert = UIAlertController(title: "No se obtuvieron los permisos de localización", message: "No podremos recomendarle las películas que están en tendencia en su país", preferredStyle: .alert)
+            let agreeButton = UIAlertAction(title: "Aceptar", style: .destructive) { UIAlertAction in
+                self.splashTimer()
+            }
+            alert.addAction(agreeButton)
+            present(alert, animated: true, completion: nil)
+        default:break
         }
     }
 }
