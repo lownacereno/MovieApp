@@ -11,6 +11,7 @@ class HomeViewModel {
     }
     
     func getMovies(){
+        
         self.dataService?.requestMovieList(completion: { (response, error) in
             if error == nil{
                 if ((response?.errorMessage .isEmpty) != nil){
@@ -20,7 +21,8 @@ class HomeViewModel {
                     print(response?.errorMessage ?? "Response Error")
                 }
             }else{
-                print(error!)
+                guard let error = error else {return}
+                print(error)
             }
         })
     }

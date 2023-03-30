@@ -11,10 +11,11 @@ extension MoviesTableViewDatasource: UITableViewDataSource{
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieListTableViewCell
-        cell.setCellMovieValue(model: (viewController?.movieList[indexPath.row])!)
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MovieListTableViewCell, let vc = viewController else {return UITableViewCell()}
+         cell.setCellMovieValue(model: vc.movieList[indexPath.row])
         return cell
     }
 }
+
 
 

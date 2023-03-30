@@ -5,12 +5,12 @@ class SplashScreen: UIViewController, CLLocationManagerDelegate{
     
     private let icon = UIImageView()
     private var timer = Timer()
-    private var locationManager : CLLocationManager!
+    private var locationManager : CLLocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager = CLLocationManager()
-        locationManager.delegate = self
+        locationManager?.delegate = self
         initViews()
         view.backgroundColor = .white
     }
@@ -39,7 +39,7 @@ class SplashScreen: UIViewController, CLLocationManagerDelegate{
     private func requesLocationPermission(){
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined || status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
-            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager?.requestWhenInUseAuthorization()
         }
     }
     

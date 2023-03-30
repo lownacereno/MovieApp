@@ -124,7 +124,8 @@ class MovieDetailViewController: UIViewController {
         movieReleaseState.text.self = detail?.releaseState
         movieStars.text.self = "Actores: \(detail?.stars ?? "")"
         movieReview.text.self = detail?.plot
-        guard let url = URL(string: detail!.image ) else {return}
+        guard let image = detail?.image else { return}
+        let url = URL(string: image )
         self.moviePoster.kf.setImage(with: url)
     }
 }

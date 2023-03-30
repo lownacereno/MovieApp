@@ -4,7 +4,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
     
     var movieList : [MovieModel] = []
     var originalMovieList : [MovieModel] = []
-    private let tableView = UITableView()
+    let tableView = UITableView()
     private let dataSource : MoviesTableViewDatasource?
     private let delegate : MoviesTableViewDelegate?
     private let viewModel = HomeViewModel(dataService: MoviesDataService())
@@ -116,7 +116,7 @@ class HomeViewController : UIViewController, HomeViewControllerProtocol, UISearc
         navigationController?.pushViewController(movieDetail, animated: true)
     }
     
-    private func checkConectivity() -> Bool {
+    func checkConectivity() -> Bool {
         if Conectivity.isConectedToInternet{
             return true
         }else{
